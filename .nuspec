@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>IocSpy</id>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <title>IocSpy</title>
     <authors>MjFard</authors>
     <dependencies>
@@ -13,7 +13,7 @@
     </dependencies>
     <owners>MjFard</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Some library that does things I enjoy.</description>
+    <description>An integration of IoC containers and a spying framework with fluent API.</description>
     <releaseNotes />
     <copyright>Copyright 2020</copyright>
     <tags>ioc</tags>
