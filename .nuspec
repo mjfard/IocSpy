@@ -1,0 +1,26 @@
+<package>
+  <metadata>
+    <id>IocSpy</id>
+    <version>1.0.0</version>
+    <title>IocSpy</title>
+    <authors>MjFard</authors>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.0">
+        <dependency id="Newtonsoft.Json" version="8.0.2"/>
+        <dependency id="Autofac" version="4.8.1"/>
+        <dependency id="NUnit" version="3.12.0"/>
+      </group>
+    </dependencies>
+    <owners>MjFard</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Some library that does things I enjoy.</description>
+    <releaseNotes />
+    <copyright>Copyright 2020</copyright>
+    <tags>ioc</tags>
+  </metadata>
+  <files>
+    <file src="OutputDlls/Library.CommonIoc.dll" target="lib\net45" />
+    <file src="OutputDlls/Pendar.CommonTest.dll" target="lib\net45" />
+    <file src="OutputDlls/Pendar.IocSpyGen.dll" target="lib\net45" />
+  </files>
+</package>
