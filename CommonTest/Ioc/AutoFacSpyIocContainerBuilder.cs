@@ -22,6 +22,8 @@ namespace Pendar.CommonTest.Ioc
         {
             _builder.RegisterInstance(instance).As<TInterface>().SingleInstance();
         }
+
+
         public void TransientGeneric(Type spyOpenType, Type intOpenType, ConcreteGenericMaker maker)
         {
             _builder.RegisterGeneric(maker.ConcreteOpenType);
@@ -39,6 +41,23 @@ namespace Pendar.CommonTest.Ioc
                 .OnActivated(args => ((ISpy)args.Instance)._Init(maker.MakeInstance(args), _master))
                 .As(intOpenType)
                 .SingleInstance();
+        }
+
+        public void SinglePerScope<TSpy>(Type concrete, params Type[] interfaces) where TSpy : ISpy, new()
+        {
+            _builder.RegisterType(concrete).SingleInstance();
+
+            var spyRegBuilder = _builder.Register(c =>
+            {
+                var spy = new TSpy();
+                spy._Init(c.Resolve(concrete), _master);
+                return spy;
+            });
+            foreach (var @interface in interfaces)
+            {
+                spyRegBuilder = spyRegBuilder.As(@interface);
+            }
+            spyRegBuilder.SingleInstance();
         }
 
         public void SinglePerScopeByInstance<TSpy, TInterface>(TInterface instance) where TSpy : ISpy, TInterface, new()
