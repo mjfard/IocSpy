@@ -22,6 +22,8 @@ namespace Pendar.CommonTest.Ioc
         {
             _builder.RegisterInstance(instance).As<TInterface>().SingleInstance();
         }
+
+
         public void TransientGeneric(Type spyOpenType, Type intOpenType, ConcreteGenericMaker maker)
         {
             _builder.RegisterGeneric(maker.ConcreteOpenType);
