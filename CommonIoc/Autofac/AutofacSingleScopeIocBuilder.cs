@@ -35,11 +35,9 @@ namespace Library.CommonIoc.Autofac
             Singleton<TImp, TInt1, TInt2>();
         }
 
-        public void SinglePerScopeByFactory<T>(
-            Func<IIocContainer, T> factory
-        ) where T : class
+        public void SinglePerScopeByFactory<T>(Func<IIocContainer, T> factory, params Type[] interfaces) where T : class
         {
-            SingletonByFactory(factory);
+            SingletonByFactory(factory, interfaces);
         }
 
         public void SinglePerScopeByFactory<T, TInt>(

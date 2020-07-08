@@ -12,17 +12,11 @@ namespace Library.CommonIoc.Interface
         void SinglePerScope<TImp, TInt>();
         void SinglePerScope<TImp, TInt1, TInt2>();
 
-        void SinglePerScopeByFactory<T>(
-            Func<IIocContainer, T> factory
-        ) where T : class;
+        void SinglePerScopeByFactory<T>(Func<IIocContainer, T> factory, params Type[] interfaces) where T : class;
 
-        void SinglePerScopeByFactory<T, TInt>(
-            Func<IIocContainer, T> factory
-        ) where T : class;
+        void SinglePerScopeByFactory<T, TInt>(Func<IIocContainer, T> factory) where T : class;
 
-        void SinglePerScopeByFactory<T, TInt1, TInt2>(
-            Func<IIocContainer, T> factory
-        ) where T : class;
+        void SinglePerScopeByFactory<T, TInt1, TInt2>(Func<IIocContainer, T> factory) where T : class;
 
         void SinglePerScopeGeneric(Type interfaceOpenType, Type implementerOpenType);
     }

@@ -30,7 +30,7 @@ namespace Library.CommonIoc.Interface
         void Singleton<TImp, TInt>();
         void Singleton<TImp, TInt1, TInt2>();
 
-        void SingletonByFactory<T>(Func<IIocContainer, T> factory) where T : class;
+        void SingletonByFactory<T>(Func<IIocContainer, T> factory, params Type[] interfaces) where T : class;
         void SingletonByFactory<T, TInt>(Func<IIocContainer, T> factory) where T : class;
         void SingletonByFactory<T, TInt1, TInt2>(Func<IIocContainer, T> factory) where T : class;
 

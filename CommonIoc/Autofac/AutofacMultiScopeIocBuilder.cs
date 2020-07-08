@@ -52,17 +52,15 @@ namespace Library.CommonIoc.Autofac
                 .InstancePerLifetimeScope();
         }
 
-        public void SinglePerScopeByFactory<T>(
-            Func<IIocContainer, T> factory
-        ) where T : class
+        public void SinglePerScopeByFactory<T>(Func<IIocContainer, T> factory, params Type[] interfaces) where T : class
         {
-            Builder.Register(c => factory(new AutofacIocContainer(c)))
-                .InstancePerLifetimeScope();
+            var regBuilder = Builder.Register(c => factory(new AutofacIocContainer(c)));
+            foreach (var @interface in interfaces)
+                regBuilder = regBuilder.As(@interface);
+            regBuilder.InstancePerLifetimeScope();
         }
 
-        public void SinglePerScopeByFactory<T, TInt>(
-            Func<IIocContainer, T> factory
-        ) where T : class
+        public void SinglePerScopeByFactory<T, TInt>(Func<IIocContainer, T> factory) where T : class
         {
             Builder.Register(c => factory(new AutofacIocContainer(c)))
                 .AsSelf()

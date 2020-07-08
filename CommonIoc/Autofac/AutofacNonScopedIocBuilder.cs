@@ -121,10 +121,12 @@ namespace Library.CommonIoc.Autofac
                 .SingleInstance();
         }
 
-        public void SingletonByFactory<T>(Func<IIocContainer, T> factory) where T : class
+        public void SingletonByFactory<T>(Func<IIocContainer, T> factory, params Type[] interfaces) where T : class
         {
-            Builder.Register(c => factory(new AutofacIocContainer(c)))
-                .SingleInstance();
+            var regBuilder = Builder.Register(c => factory(new AutofacIocContainer(c)));
+            foreach (var @interface in interfaces)
+                regBuilder = regBuilder.As(@interface);
+            regBuilder.SingleInstance();
         }
 
         public void SingletonByFactory<T, TInt>(Func<IIocContainer, T> factory) where T : class
