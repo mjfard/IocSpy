@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\_Packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\..\_Packages\NUnit.3.12.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34148272-6AAC-4F7D-96C1-C508D6BA85AA}</ProjectGuid>
+    <ProjectGuid>{FC6946F2-073D-4D41-A9A9-FF5FB65C0526}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pendar.CommonTest</RootNamespace>
-    <AssemblyName>Pendar.CommonTest</AssemblyName>
+    <RootNamespace>Pendar.IocSpyGen</RootNamespace>
+    <AssemblyName>Pendar.IocSpyGen</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +37,6 @@
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\_Packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\_Packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,36 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CloneTarget.cs" />
-    <Compile Include="DeepCloneManager.cs" />
-    <Compile Include="Ioc\ConcreteGenericMaker.cs" />
+    <Compile Include="Extractor.cs" />
+    <Compile Include="ExtractorMethods.cs" />
+    <Compile Include="Generators\IocConfigGenerator.cs" />
+    <Compile Include="Generators\IocTypesGenerator.cs" />
+    <Compile Include="Generators\SpyGenerator.cs" />
+    <Compile Include="Generators\SpyIocConfigGenerator.cs" />
+    <Compile Include="IocHelperMethods.cs" />
+    <Compile Include="Managers\GenericManager.cs" />
+    <Compile Include="Managers\UsingManager.cs" />
+    <Compile Include="Methods.cs" />
+    <Compile Include="Model\CsProjInfo.cs" />
+    <Compile Include="Model\GenInfo.cs" />
+    <Compile Include="Model\IMemberInfo.cs" />
+    <Compile Include="Model\InputInfo.cs" />
+    <Compile Include="Model\MethodInfo.cs" />
+    <Compile Include="Model\OutPutInfo.cs" />
+    <Compile Include="Model\PropInfo.cs" />
+    <Compile Include="Model\SpyGenInfo.cs" />
+    <Compile Include="IocHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpyFramework\BaseSpy.cs" />
-    <Compile Include="SpyFramework\CallInfoListMethods.cs" />
-    <Compile Include="SpyFramework\Fluent\BaseNewHookCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\CountShouldBeCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\HookCallCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\InterfaceCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\HookInOutCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\MethodCfg.cs" />
-    <Compile Include="SpyFramework\Fluent\Model\CfgInfo.cs" />
-    <Compile Include="SpyFramework\Fluent\WhenCfg.cs" />
-    <Compile Include="SpyFramework\HookRepository.cs" />
-    <Compile Include="SpyFramework\Interface\ICallInfo.cs" />
-    <Compile Include="SpyFramework\Interface\ISpyIocContainerBuilder.cs" />
-    <Compile Include="SpyFramework\Interface\IInternalCallInfo.cs" />
-    <Compile Include="SpyFramework\Interface\ISpy.cs" />
-    <Compile Include="SpyFramework\Model\CallInfo.cs" />
-    <Compile Include="SpyFramework\Model\FinalChecker.cs" />
-    <Compile Include="SpyFramework\Model\Hook.cs" />
-    <Compile Include="SpyFramework\Model\HookFailureInstance.cs" />
-    <Compile Include="SpyFramework\Model\CheckResult.cs" />
-    <Compile Include="Ioc\AutoFacSpyIocContainerBuilder.cs" />
-    <Compile Include="SpyFramework\SpyResultManager.cs" />
-    <Compile Include="SpyFramework\SpiedTest.cs" />
-    <Compile Include="SpyFramework\SpyMaster.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -95,10 +84,4 @@
   <PropertyGroup>
     <PostBuildEvent>COPY "$(TargetPath)" "$(ProjectDir)..\OutputDlls\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\_Packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\_Packages\NUnit.3.12.0\build\NUnit.props'))" />
-  </Target>
 </Project>

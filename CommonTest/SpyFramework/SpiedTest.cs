@@ -16,7 +16,7 @@ namespace Pendar.CommonTest.SpyFramework
 
         private List<Hook> _hooks = new List<Hook>();
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void BaseSetup()
         {
             try

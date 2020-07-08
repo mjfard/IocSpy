@@ -1,5 +1,5 @@
 ﻿using System;
-using Library.Common.ObjectExt;
+using Library.CommonIoc.Helpers;
 using Pendar.CommonTest.SpyFramework.Interface;
 
 namespace Pendar.CommonTest.SpyFramework.Model

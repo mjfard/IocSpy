@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\_Packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,17 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\IOCAttribute.cs" />
+    <Compile Include="Attributes\IOC_SinglePerScopeAttribute.cs" />
+    <Compile Include="Attributes\IOC_SingletonAttribute.cs" />
+    <Compile Include="Attributes\IOC_TransientAttribute.cs" />
+    <Compile Include="Autofac\AutofacIocContainer.cs" />
+    <Compile Include="Autofac\AutofacMultiScopeIocBuilder.cs" />
+    <Compile Include="Autofac\AutofacNonScopedIocBuilder.cs" />
+    <Compile Include="Enums\LifeTime.cs" />
     <Compile Include="Attributes\SpiedAttribute.cs" />
-    <Compile Include="Interface\IConfigableIocContainer.cs" />
+    <Compile Include="Helpers\EnumerableHelper.cs" />
+    <Compile Include="Helpers\MemoryDiskHelper.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Interface\IFactory.cs" />
+    <Compile Include="Interface\IIocContainerBuilder.cs" />
+    <Compile Include="Interface\IIocAttribute.cs" />
     <Compile Include="Interface\IIocContainer.cs" />
+    <Compile Include="Interface\INonScopedIocBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Autofac\AutofacSingleScopeIocBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>COPY "$(TargetPath)" "$(ProjectDir)..\OutDlls\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>COPY "$(TargetPath)" "$(ProjectDir)..\OutputDlls\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
