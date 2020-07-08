@@ -60,6 +60,20 @@ namespace Pendar.CommonTest.Ioc
             spyRegBuilder.SingleInstance();
         }
 
+        public void SinglePerScopeByInstance<TSpy>(object instance, params Type[] interfaces) where TSpy : ISpy, new()
+        {
+            var spyRegBuilder = _builder.Register(c =>
+            {
+                var spy = new TSpy();
+                spy._Init(instance, _master);
+                return spy;
+            });
+            foreach (var @interface in interfaces)
+            {
+                spyRegBuilder = spyRegBuilder.As(@interface);
+            }
+            spyRegBuilder.SingleInstance();
+        }        
         public void SinglePerScopeByInstance<TSpy, TInterface>(TInterface instance) where TSpy : ISpy, TInterface, new()
         {
             _builder.Register<TInterface>(c =>

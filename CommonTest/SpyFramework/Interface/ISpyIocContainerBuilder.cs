@@ -20,5 +20,6 @@ namespace Pendar.CommonTest.SpyFramework.Interface
         void Singleton<TSpy, TInterface>(Type concrete) where TSpy : ISpy, TInterface, new();
 
         void SinglePerScope<TSpy>(Type concrete, params Type[] interfaces) where TSpy : ISpy, new();
+        void SinglePerScopeByInstance<TSpy>(object instance, params Type[] interfaces) where TSpy : ISpy, new();
     }
 }
