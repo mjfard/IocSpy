@@ -1,6 +1,8 @@
 # IocSpy
 An integration of IoC containers and a spying framework with fluent API
 
+this tool genenerates spies, IocConfig and TestIocConfig for you.
+
 Example of Spy setup for a test:
 
         public override void SpySetUp()
